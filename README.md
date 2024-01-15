@@ -56,4 +56,13 @@ This would correlate to the first one hundred episodes of the final 500 episodes
 Each agent is defined as a class with the hyperparameters for the run specified. More details about the specific implementation are given in the respective files.
 
 #### Heuristic Policies
-In addition to the DQN-Policies we implemented two heuristic policies. The planned heuristic policy $H_P$ and the random heuristic policy $H_R$.
+In addition to the DQN-Policies we implemented two heuristic policies. The planned heuristic policy $H_P$ and the random heuristic policy $H_R$. 
+
+- $H_P$ provides a planned approach to repairing components by prioritizing broken components based on dictionary defined in the file. The arcs are ordered based off the flow they facilitate in the fully functional state int 0. This is ment to simulate the idea of fixing the "biggest" or supposedly most vital components first.
+- $H_R$ repairs components at random once they are broken and makes no distinction between individual arcs.
+
+Note that both policies are incapable of conducting preemptive repairs. This is in different from the OSAS and DQN policies. 
+
+#### One-Step-Action-Search Policy
+This policy follows a simplistic algorithm where in each state all possible actions are evaluated against each other. We then select the one with the highest return in this state. We then simulate the environment for an additional x steps without taking any action and take these costs into account. This allows for the future implied cost to be included in the action evaluation. 
+This policy is calculated in parrallel as this greatly speeds up the computation process. For each state a number of child processes are spawned that evaluate each action independently. At the end all the data is combined and the parent process evaluates what action to take. It is therefore advisable to create a bash script to start multiple instances of the OSAS_Policy file with different start and end states to brute force the entire state space much faster. This is highly dependant on your server and available ressources. 
