@@ -36,3 +36,21 @@ The state representation is extended by n elements that hold the current failure
 In essence two different scenarios are coded here. The normal operation scenario allows for a continious operation of the infrastructure for a specified amount of steps. This is defined in the policy files themselves. The surprise attack scenario intializes an episode with a partially destroyed system (the surprise attack). It then sets all failure rates to zero so that operational components remain operational. It then passes the done flag once all components have been fixed. 
 
 Multiple helper functions in this file facilitate the state transition and environment class. 
+
+## 4. Policies
+
+Multiple policies are implemented in this repository. This project comes with multiple DQN versions as well as one heuristic version and a One-Step-Optimal-Search (OSAS) policy. One can add different policies here. Each policy is coded in its specific file, but draws and stores data during training and evaluation to a specified storage folder. The folder can be found under /data/{policy_name}. The data stored during training are mostly 
+
+#### DQN-Policies: 
+we implemented 3 different versions in this initial repo. 
+- V1: The first one learns only from the available failure indicators of the state. It therefore only sees the first 18 elements of the state vector since those contain the operational status of each component.
+- V2: Learns from the failure indicators as well as the failure probability of each component. It therefore comes up with an action based on the entire state vector.
+- V3: Is identical to V2 but it starts off each episode in a broken state. This is done to expand the search of the state-action space.
+
+Each DQN policy is defined in the files and follows a similar pattern. When initializing an agent under a certain name it looks up if there are any existing models under that name. If so those models will be preloaded. This allows to create a checkpoint for that agent that it can continue training from. The implementation here is not ideal, since it is theoretical possible to compile a network and load it from a checkpoint. However this is currently not possible due to the dynamic nature of the learning algorithm. This has to be addressed in future updates. In order to accomodate for that fact an implementation has been chosen, where the user needs to specify the name. The starting episode of that run, the end episode of that run and then the total number of episodes this agent is to be trained. 
+
+Starting the agent from the cli like so:
+$python3 DQLV1.py {agent_name} 0 100 500 
+This would correlate to the first one hundred episodes of the final 500 episodes training run for that agent. This is also necessary to calculate the current epsilon value in case the training process is to be split up in multiple seperate runs. This is necessary when training some very large number of episodes like 15k or above. 
+
+#### Heuristic Policies
