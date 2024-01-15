@@ -53,4 +53,7 @@ Starting the agent from the cli like so:
 $python3 DQLV1.py {agent_name} 0 100 500 
 This would correlate to the first one hundred episodes of the final 500 episodes training run for that agent. This is also necessary to calculate the current epsilon value in case the training process is to be split up in multiple seperate runs. This is necessary when training some very large number of episodes like 15k or above. 
 
+Each agent is defined as a class with the hyperparameters for the run specified. More details about the specific implementation are given in the respective files.
+
 #### Heuristic Policies
+In addition to the DQN-Policies we implemented two heuristic policies. The planned heuristic policy $H_P$ and the random heuristic policy $H_R$.
