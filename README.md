@@ -66,3 +66,29 @@ Note that both policies are incapable of conducting preemptive repairs. This is 
 #### One-Step-Action-Search Policy
 This policy follows a simplistic algorithm where in each state all possible actions are evaluated against each other. We then select the one with the highest return in this state. We then simulate the environment for an additional x steps without taking any action and take these costs into account. This allows for the future implied cost to be included in the action evaluation. 
 This policy is calculated in parrallel as this greatly speeds up the computation process. For each state a number of child processes are spawned that evaluate each action independently. At the end all the data is combined and the parent process evaluates what action to take. It is therefore advisable to create a bash script to start multiple instances of the OSAS_Policy file with different start and end states to brute force the entire state space much faster. This is highly dependant on your server and available ressources. 
+
+## Data Collection and Analysis
+In order to compare different policies and generate insights on the learned strategies data has to be collected during training and evaluation. 
+The data collected follows a specific pattern that then can be accessed by the support functions in the *support.py* file that allow for data visualization.
+
+#### Data Collection
+There are multiple data types and files created during training. This data can be accessed in the data/{policy_name}/{agent_name} folder. E.g. data/V1/V1001. 
+
+The following data is collected for all policies:
+- evaluation_cost: the average cost per episode during evaluation
+- evaluation reward: the average reward per episode during evaluation
+- component data: Number of repairs, preemptive repairs and downtimes on all components during the evaluation run
+
+For the DQN Policies this data is also collected during the training time. 
+
+
+
+
+
+
+
+
+
+
+
+
