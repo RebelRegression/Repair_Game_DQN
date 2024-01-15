@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import json
 import csv
 import networkx as nx
-from environmentfile import bits, bit_val
+from Environment_package.environment_generator import bits, bit_val
 import pandas as pd
 
 def create_figure(training_running_reward: list, training_running_cost: list, evaluation_running_cost: list, evaluation_running_reward: list, training_window: int, evaluation_window: int, agent_name:str, storage_folder:str):
@@ -255,26 +255,12 @@ def create_cost_training_figure(*agent_names, storage_folder:str, training_windo
         ax.plot(data, label=f'{labelname}', color=colors[color_idx])
         color_idx += 1
     ax.legend()
-    # ax.set_title('Training: Cost')
-
-
-    # # Plot the second subplot
-    # ax.set_xlabel('episode')
-    # ax.set_ylabel('average cost per step')
-    # color_idx = 0
-    # for name in agent_names:
-    #     data = scaled_data_dict[f'{name}_eval_cost']
-    #     num_data_points = len(data) // 100
-
-    #     # Reshape the data for candlestick plot
-    #     reshaped_data = [data[i*100:(i+1)*100] for i in range(num_data_points)]
 
 
     # Adjust layout for better spacing
     plt.tight_layout()
     plt.savefig(f'{name_of_plot_file}.png')
     
-# create_cost_training_figure('V1021', 'V2021','V30223', storage_folder='data/V3', training_window=100, eval_window=1, name_of_plot_file='15k')
 
 
 def create_custom_figure_eval(*agent_names, storage_folder:str, eval_window: int, name_of_plot_file: str):
@@ -381,9 +367,6 @@ def create_custom_figure_eval(*agent_names, storage_folder:str, eval_window: int
     plt.tight_layout()
     plt.savefig(f'{name_of_plot_file}.png')
     print('\nCreated figure and saved in current directory\n')
-
-# create_custom_figure_eval('policy1','policy2','V1021','V2021','V30221', 'V30222', 'V30223',storage_folder='data/custom_data', eval_window=1, name_of_plot_file='different_network_architecture')
-# create_custom_figure_eval('policy1','policy2','via','V1022','V2021','V30224',storage_folder='data/custom_data', eval_window=1, name_of_plot_file='normal_eval_all_policies')
 
 
 def create_heatmap_system(agent_name:str , data_type: str, max_steps: int=360):
@@ -721,10 +704,12 @@ def solve_for_state(intstate:int):
     """solves the model for a specific state and returns the optimal flow on each arc
     Args:
         int_state  (int): an int state for the Alderson Model
+    Returns: 
+        println    (str): prints the output to the cli
         """
     import pyomo.environ as pyo
     import time
-    from System.Alderson_2015_full.fuelnet_model_2022 import build_model, print_results
+    from System.fuelnet_model_2022 import build_model, print_results
     
     node_file = 'System/Alderson_2015_modified/node_data.csv'
     arc_file = 'System/Alderson_2015_modified/arc_data.csv'
@@ -758,50 +743,17 @@ def solve_for_state(intstate:int):
     print ("The solver returned a status of:"+str(results.solver.status))
     print_results(model)
 
-# solve_for_state(0)
 
-# create_custom_figure_eval('policy1','policy2','via','V1022','V2021','V30223',storage_folder='data/custom_data', eval_window=1, name_of_plot_file='norm_eval_all_policies')
-# create_custom_figure_eval('policy1_surpriseattrition','policy2_surpriseattrition','via_surpriseattrition','V1022_surpriseattrition','V2021_surpriseattrition','V30223_surpriseattrition',storage_folder='data/custom_data', eval_window=1, name_of_plot_file='surp_eval_all_policies')
-# create_custom_figure_eval('V1021_surpriseattrition','V1022_surpriseattrition','V1023_surpriseattrition','V1024_surpriseattrition',storage_folder='data/custom_data', eval_window=1, name_of_plot_file='surp_eval_v1_policies')
-# create_custom_figure_eval('V2021_surpriseattrition','V2022_surpriseattrition',storage_folder='data/custom_data', eval_window=1, name_of_plot_file='surp_eval_v2_policies')
-# create_custom_figure_eval('V30221','V30222','V30223', storage_folder='data/custom_data', eval_window=1, name_of_plot_file='norm_eval_v3_policies')
-# create_custom_figure_eval('policy1_surpriseattack','policy2_surpriseattack','via_surpriseattack', 'V4024', storage_folder='data/custom_data', eval_window=1, name_of_plot_file='surp-ack-all-policies')
-
-# create_heatmap_system('policy1', 'failed_ratio',360)
-# agentnames = ['policy1','policy2','via','V1021','V1022','V2021','V30223']
-# agentnames = ['V2021', 'V30223']
-# for name in agentnames: 
-#     create_heatmap_system(f'{name}_surpriseattrition', 'failed_ratio',360)
-#     create_heatmap_system(f'{name}', 'failed_ratio',360)
-#     create_heatmap_system(f'{name}_surpriseattrition', 'repaired_ratio',360)
-#     create_heatmap_system(f'{name}', 'repaired_ratio',360)
-#     create_heatmap_system(f'{name}_surpriseattrition', 'preemptive_repair_ratio',360)
-#     create_heatmap_system(f'{name}', 'preemptive_repair_ratio',360)
-# create_heatmap_system('V1021_surpriseattrition', 'preemptive_repair_ratio',360)
-    
-# create_custom_figure('V1021', 'V2021','V3021', storage_folder='data/V3', training_window=100, eval_window=10, name_of_plot_file='15k')
-# create_custom_figure('V1031', 'V2031','V3031', storage_folder='data/V3', training_window=100, eval_window=10, name_of_plot_file='3repaircrews')
-# create_custom_figure('V3027', 'V3028','V3029','V30210', 'V30211', storage_folder='data/V3', training_window=100, eval_window=10, name_of_plot_file='V3-diff_starting_states')
-# create_custom_figure('V4021', 'V4022','V4023','V4024', storage_folder='data/V4', training_window=100, eval_window=10, name_of_plot_file='V4-diff_starting_states')
-# create_custom_figure('V30212', 'V30215', 'V30214','V30213', storage_folder='data/V3', training_window=100, eval_window=10, name_of_plot_file='V3-diff_batch_size')
-# create_custom_figure('V30212', 'V30216','V3021', storage_folder='data/V3', training_window=100, eval_window=10, name_of_plot_file='V3-diff_replacement_cost')
-# create_custom_figure('V30218', 'V30215', storage_folder='data/V3', training_window=100, eval_window=10, name_of_plot_file='V3-diff_network_structure')
-
-# create_custom_figure_eval('via_surpriseattack', 'V4024','V4025', 'policy2_surpriseattack', 'policy1_surpriseattack',storage_folder='data/custom_data', training_window=1, eval_window=1, name_of_plot_file='surpriseattackeval')
-# create_custom_figure_eval('V3021', 'V1022', storage_folder='data/custom_data', training_window=1, eval_window=1, name_of_plot_file='surpriseeval')
-# create_custom_figure_eval('V30217','V30218','policy2', 'via', storage_folder='data/custom_data', training_window=5, eval_window=10, name_of_plot_file='Normalattrition_eval')
-# create_custom_figure_eval('V30212','policy1_2', 'policy2_2', 'via', storage_folder='data/custom_data', training_window=1, eval_window=1, name_of_plot_file='normal_eval_1replacement_cost')
-# create_custom_figure_eval('V30212','V30212_1', 'V30212_5', 'V30216', storage_folder='data/custom_data', training_window=1, eval_window=1, name_of_plot_file='normal_eval_diff_replacement_cost_2')
-# create_custom_figure_eval('V1026','policy1', 'policy2', 'via', 'V30218','V2025',storage_folder='data/custom_data', training_window=10, eval_window=10, name_of_plot_file='normal_eval_low_attrition_rate')
-# create_custom_figure_eval('V1026_surpriseattrition', 'policy1_surpriseattrition', 'policy2_surpriseattrition', 'via_surpriseattrition', 'V30218_surpriseattrition', 'V2025_surpriseattrition',storage_folder='data/custom_data', training_window=10, eval_window=10, name_of_plot_file='Surpriseattrition_eval_low_attrition')
-# create_custom_figure_eval('policy2', 'V30218',storage_folder='data/custom_data', training_window=10, eval_window=10, name_of_plot_file='normal_eval_pol2vV30218')
-# create_custom_figure_eval('policy2','V1021','V30221', 'V30222', 'V30223',storage_folder='data/custom_data', training_window=10, eval_window=10, name_of_plot_file='different_network_architecture')
-# create_custom_figure_eval('policy2_surpriseattrition','V1021_surpriseattrition','V30221_surpriseattrition', 'V30222_surpriseattrition', 'V30223_surpriseattrition',storage_folder='data/custom_data', training_window=10, eval_window=10, name_of_plot_file='different_network_architecture_surpriseattrition')
-
-def combine_via_csv_files(outputfilename):
+def combine_via_csv_files(outputfilename:str):
+    """Combines the csv files of the One Step Action Search Algorithm. Under normal circumstances one would execute this algorithm in parallel in order to speed up the computation. 
+    This function is ment to combine the resulting csv files.
+    Args:
+        outputfilename      (str): name of the outputfile
+    Returns: 
+        csv file            (csv): one file containg all entries of the csv files that fit the name scheme."""
 
     try:
-        with open(f'data/via/{outputfilename}.csv'):
+        with open(f'data/osas/{outputfilename}.csv'):
             input = input(f'filename: {output_file} already exists. Press y to continue')
     except:
         input = 'y'
@@ -811,8 +763,8 @@ def combine_via_csv_files(outputfilename):
         filecounter = 0
         for i in range(262143+1):
             try:
-                with open(f'data/via/Run2/Splitfiles/via{i}.csv', 'r', newline='') as readfile:
-                    with open(f'data/via/Run2/{outputfilename}.csv', 'a', newline='') as output_file:
+                with open(f'data/osas/splitfiles/osas{i}.csv', 'r', newline='') as readfile:
+                    with open(f'data/osas/{outputfilename}.csv', 'a', newline='') as output_file:
                         csv_reader = csv.reader(readfile)
                         csv_writer = csv.writer(output_file)
 
@@ -876,12 +828,14 @@ def get_bit_val_from_str(connections: list) -> int:
 
 def component_visual_data(initial_failure_rate: int, attrition_rate: int, episodes: int, surprise_attrition_rate: int=0.01):
     """takes in an initial failure probability and attrition rate and returns a graph that depicts the failure rate over
-    the specified episodes of a component
+    the specified episodes of a component.
     
     Args: 
         initial_failure_rate   (int): the initial failure rate of each component in the environment
         attrition_rate         (int): attrition rate that the component suffers at each timestep
-        episodes               (int): episodes over which to visualize the current failure rate"""
+        episodes               (int): episodes over which to visualize the current failure rate
+    Returns:
+    plot                       (plt): Pop up window with plot of distribution"""
     
     x = [i for i in range(0,episodes,10)]
     l = [i for i in range(episodes)]
@@ -950,8 +904,6 @@ def component_visual_data(initial_failure_rate: int, attrition_rate: int, episod
     # plt.title('Component Status')
     # plt.legend()
     plt.show()
-
-# component_visual_data(0.995, 0.005, 50)
 
 
 def show_states_visited_data(agent_name:str, show_as:str='heatmap'):
@@ -1035,32 +987,12 @@ def show_states_visited_data(agent_name:str, show_as:str='heatmap'):
         raise ValueError(f"{show_as} option not valid. Available options are: {valid_options}")
 
 
-# show_states_visited_data('policy2', 'barchart')
-# create_state_graph(33)
-# create_state_graph(3078)
-# x = 131072
-# for i in range (20):
-#     create_state_graph(x)
-#     # x += 512
-#     x +=1
-# create_state_graph(16512)
-# create_state_graph(18448)
-# create_state_graph(18452)
-# create_state_graph(26644)
-# create_state_graph(131857)
-# create_state_graph(131905)
-# create_state_graph(131907)
-# create_state_graph(131969)
-# create_state_graph(131745)
-# create_state_graph(131713)
-# create_state_graph(131714)
-# create_state_graph(131715)
-# create_state_graph(412)
-# create_state_graph(262043)
-
-
 def show_broken_pair_matrix(agent_name:str):
-    """Shows a heatmap of the matrix with the frequency of all broken component pairs"""
+    """Shows a heatmap of the matrix with the frequency of all broken component pairs.
+    Args:
+        agent_name  (str): name of the agent
+    Returns:
+        plot    (plt): pop up window with the broken pair matrix showing all pair combinations"""
 
     # Get the data from the file
     nameparts = agent_name.split('_')
@@ -1145,7 +1077,14 @@ def show_broken_pair_matrix(agent_name:str):
 
 # show_broken_pair_matrix('V2021_surpriseattrition')
 
-def violin_distribution_plots(*agent_names:str, storage_folder:str='data/custom_data'): 
+def violin_distribution_plots(*agent_names:str, storage_folder:str='data/custom_data'):
+    """Takes an agent and store folder and creates a violin plot of the evalutaion cost of that agent.
+    Args: 
+        agent_name      (str): name(s) of the agent(s)
+        storage_folder  (str): subdirectory where the data is stored
+        
+    Returns:
+        plt (plt): a popup of the violin plot"""
     import seaborn as sns
     import matplotlib.pyplot as plt
 
@@ -1174,16 +1113,6 @@ def violin_distribution_plots(*agent_names:str, storage_folder:str='data/custom_
             evaluation_running_cost = json.load(f)
         
         data.append(np.array(evaluation_running_cost))
-        print(evaluation_running_cost)
-
-    # Example data (replace this with your own data)
-    # distribution_names = ['Distribution 1', 'Distribution 2', 'Distribution 3']
-    # means = [10, 15, 20]
-    # std_devs = [2, 3, 4]
-
-    # Generate random data for the example
-    # data = [np.random.normal(mean, std_dev, 100) for mean, std_dev in zip(means, std_devs)]
-    print(data)
 
     # Reshape the data for seaborn
     reshaped_data = np.concatenate([np.vstack(data[i]).T for i in range(len(data))])
@@ -1198,7 +1127,3 @@ def violin_distribution_plots(*agent_names:str, storage_folder:str='data/custom_
     sns.violinplot(x='Policy', y='Cost per Step', data=df, inner='quartile')
     plt.title('Surprise Condition Performance')
     plt.show()
-
-# violin_distribution_plots('policy1','policy2','via','V1022','V2021','V30223')
-# violin_distribution_plots('policy1_surpriseattrition','policy2_surpriseattrition','via_surpriseattrition','V1022_surpriseattrition','V2021_surpriseattrition','V30224_surpriseattrition')
-# violin_distribution_plots('policy1')
