@@ -1,4 +1,4 @@
-__TL:DR__
+__TL;DR__
 - This is a project to demonstrate the use of the Deep-Q-Network (DQN) Algorithm by Mnih et al. on a maintenance repair problem for a generic fuel infrastructure.
 - You can train and benchmark your own algorithms on the environment provided here or play around with different hyperparemter settings for the DQN algorithms. 
 
