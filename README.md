@@ -1,4 +1,6 @@
-This is a project to demonstrate the use of the Deep-Q-Network (DQN) Algorithm by Mnih et al. on a maintenance repair problem for a generic fuel infrastructure.
+__TL:DR__
+- This is a project to demonstrate the use of the Deep-Q-Network (DQN) Algorithm by Mnih et al. on a maintenance repair problem for a generic fuel infrastructure.
+- You can train and benchmark your own algorithms on the environment provided here or play around with different hyperparemter settings for the DQN algorithms. 
 
 ## 1. Introduction
 The goal is to demonstrate that we can use the DQN algorithm to find a maintenance policy that determines the repair schedule of components on a generic fuel infrastructure model. 
