@@ -69,7 +69,7 @@ Note that both policies are incapable of conducting preemptive repairs. This is 
 This policy follows a simplistic algorithm where in each state all possible actions are evaluated against each other. We then select the one with the highest return in this state. We then simulate the environment for an additional x steps without taking any action and take these costs into account. This allows for the future implied cost to be included in the action evaluation. 
 This policy is calculated in parrallel as this greatly speeds up the computation process. For each state a number of child processes are spawned that evaluate each action independently. At the end all the data is combined and the parent process evaluates what action to take. It is therefore advisable to create a bash script to start multiple instances of the OSAS_Policy file with different start and end states to brute force the entire state space much faster. This is highly dependant on your server and available ressources. 
 
-## Data Collection and Analysis
+## 5. Data Collection and Analysis
 In order to compare different policies and generate insights on the learned strategies data has to be collected during training and evaluation. 
 The data collected follows a specific pattern that then can be accessed by the support functions in the *support.py* file that allow for data visualization.
 
