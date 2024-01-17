@@ -42,7 +42,7 @@ elif eval_mode == 'surprise':
     save_name_ind = '_surpriseattrition'
 elif eval_mode == 'attack':
     env = environment_surprise_attack(n_components=18, n_repair_crews=2, solution_cost_file='System/Alderson_2015_modified/states_solution_full_V2.csv')
-    # List with all starting states with 1 to 18 broken components and the 10 worst states each
+    # List with all starting states for the attack evaluation, changable at will. In this case it contains the 10 worst states for 1 - 18 broken components.
     starting_states = [2, 4, 8, 32, 64, 128, 256, 512, 1024, 4096, 
         40, 272, 768, 1536, 8196, 8224, 16416, 16512, 20480, 81920,
         352, 1664, 2688, 5632, 16417, 16418, 16424, 16516, 24704, 131112,
