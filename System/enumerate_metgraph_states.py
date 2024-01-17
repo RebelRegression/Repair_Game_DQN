@@ -6,6 +6,13 @@ from pyomo.opt import SolverStatus, TerminationCondition
 import time
 from fuelnet_model_2022 import build_model, print_results
 
+"""
+Descriptions:
+- Contains code from Alderson et al. (2015)
+- Evaluates the objective function value for the underlying flow model for each possible state in the state space
+- Creates a csv file where the cost for each state is associated with the int state representation
+"""
+
 
 # def get_state(model):
 #     '''returns a bitstring corresponding to network state'''
