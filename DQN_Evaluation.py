@@ -7,7 +7,8 @@ import json
 import numpy as np
 from Environment_package.environment_generator import environment, environment_surprise_attack
 
-"""Descriptions:
+"""
+Descriptions:
 - This file allows for the evaluation of trained DQN policies. 
 - Start the evaluation by editing the agent_name and eval_mode variable. 
 - Determine how many episodes you want to evaluate on. 
