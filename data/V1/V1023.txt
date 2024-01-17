@@ -1,0 +1,26 @@
+Agent name: V1023 
+Replacement Cost: 1 
+Attrition Rate: 0.005 
+Initial Failure Rate: 0.005
+max_steps: 360 
+Model: "model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_1 (InputLayer)        [(None, 18)]              0         
+                                                                 
+ dense (Dense)               (None, 128)               2432      
+                                                                 
+ dense_1 (Dense)             (None, 172)               22188     
+                                                                 
+=================================================================
+Total params: 24,620
+Trainable params: 24,620
+Non-trainable params: 0
+_________________________________________________________________
+ 
+
+gamma: 0.9 
+learning rate: <tf.Variable 'learning_rate:0' shape=() dtype=float32, numpy=0.00025> 
+epsilon: 1.0, epsilon_decay_factor: 0.9998535290894223 min_epsilon: 0.1 
+episodes trained: 15000
