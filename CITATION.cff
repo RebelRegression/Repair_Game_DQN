@@ -1,27 +1,32 @@
-// For the implementation and data analysis part please cite {WIP}
+cff-version: 1.2.0
+title: Repair Game DQN Policy Interpretation
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Vincent
+    family-names: Wickel
+    email: vincent.wickel@gmail.com
+  - given-names: David
+    family-names: Alderson
+    email: dlalders@nps.edu
+  - given-names: Daniel
+    family-names: Eisenberg
+    email: daniel.eisenberg@nps.edu
+  - given-names: Jefferson
+    family-names: Huang
+    email: jefferson.huang@nps.edu
+abstract: >-
+  This project uses the DQN algorithm to search for repair
+  policies in a generic fuel infrastructure. It allows the
+  user to implement different infrastructure models,
+  environmental functions and policies, and provides
+  evaluation and data representation capabilities. 
+keywords:
+  - Deep-Q-network
+  - Reinforcement Learning
+  - Infrastructure Resilience
+license: MIT
 
-
-// For the Min-Cost flow model please cite Alderson et al. 
-@article{alderson2015operational,
-  title={Operational models of infrastructure resilience},
-  author={Alderson, David L and Brown, Gerald G and Carlyle, W Matthew},
-  journal={Risk Analysis},
-  volume={35},
-  number={4},
-  pages={562--586},
-  year={2015},
-  publisher={Wiley Online Library}
-}
-
-// For the DQN Algorithm please cite Mnih et al.:
-@article{mnih2015human,
-  title={Human-level control through deep reinforcement learning},
-  author={Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Rusu, Andrei A and Veness, Joel and Bellemare, Marc G and Graves, Alex and Riedmiller, Martin and Fidjeland, Andreas K and Ostrovski, Georg and others},
-  journal={nature},
-  volume={518},
-  number={7540},
-  pages={529--533},
-  year={2015},
-  publisher={Nature Publishing Group}
-}
 
