@@ -1,6 +1,12 @@
 __TL;DR__
 - This is a project to demonstrate the use of the Deep-Q-Network (DQN) Algorithm by Mnih et al. on a maintenance repair problem for a generic fuel infrastructure.
-- You can train and benchmark your own algorithms on the environment provided here or play around with different hyperparemter settings for the DQN algorithms. 
+- You can train and benchmark your own algorithms on the environment provided here or play around with different hyperparemter settings for the DQN algorithms.
+
+## How to cite this work:
+Complementing this code is a master thesis. The exact citation will be added in the future. 
+
+- For the min-cost flow model please cite [Alderson et al. (2015)](https://onlinelibrary.wiley.com/doi/full/10.1111/risa.12333)
+- For the Deep-Q-network algorithm please cite [Mnih et al. (2015)](https://www.nature.com/articles/nature14236?source=post_page---------------------------)
 
 ## 1. Introduction
 The goal is to demonstrate that we can use the DQN algorithm to find a maintenance policy that determines the repair schedule of components on a generic fuel infrastructure model. 
